@@ -1,12 +1,13 @@
-//#define WINDOWS
-#define LINUX
-
-/** FAMILY TREE */
+//+------------------------------------------------------------------------------------
+//                          Family Tree Manaement system
+//
+//                                  Minor Project 
+//         Team: Aman sheoran || Milan singh || Mayank Garg || Steve Yadav 
+//  
 
 #include<iostream>
 #include<string.h>
 #include<stdlib.h>
-
 using namespace std;
 
 struct node
@@ -220,7 +221,7 @@ void familyTree::find()
             }
             strcpy(str,"aunt");
             if(ptrk->g)
-                strcpy(str,"uncule");
+                strcpy(str,"uncle");
             cout<<endl<<name1<<" is "<<name2<<"'s "<<str;
             break;
 
@@ -412,6 +413,7 @@ void connect(familyTree *T1, familyTree *T2)
 
 int main()
 {
+     system("Color 16"); 
     familyTree T[100];
     int opt,n,n1,n2;
     char c,name[50];
