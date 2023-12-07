@@ -12,7 +12,6 @@
 using namespace std;
 #define Linux
 
-
 void welcome()
 {
     int n;
@@ -29,7 +28,6 @@ void welcome()
     cin>>n;
     system("clear");
 }
-
 // this is the node , each person will be a node 
 struct node
 {
@@ -88,12 +86,10 @@ public:
     void updateX(node*,int);
 
 };
-
 family::family()
 {
     start = NULL;
 }
-
 void family::destroy(node* ptr)
 {
     node* temp = ptr;
@@ -111,7 +107,6 @@ void family::destroy(node* ptr)
 
     start = NULL;
 }
-
 void family::show(node* ptr)
 {
     char g[10];
@@ -122,26 +117,8 @@ void family::show(node* ptr)
     cout<<"Age: "<< ptr->age <<endl;
     cout<<"Gender: "<<g<<endl;
 }
-
-void family::display(node* ptr)
-{
-    // Traverses the full n-array tree by recursion to display names of all people
-
-    if(ptr==NULL)
-        return;
-
-    while(ptr!=NULL)
-    {
-        cout<< ptr->name <<endl;
-        display(ptr->fc);
-        ptr = ptr->ns;
-    }
-}
-
 void family::updateX(node* ptr,int x)
 {
-    // Traverses the full n-array tree by recursion and updates x value of all people
-
     if(ptr==NULL)
         return;
 
@@ -153,148 +130,8 @@ void family::updateX(node* ptr,int x)
         ptr = ptr->ns;
     }
 }
-
-void family::find()
-{
-
-    /*
-        Same hight: Sibiling if same parent, else cousin
-        Difference of height = 1 - Parent if immediate, else uncule/aunt
-        Difference oh height = 2 - Grand parents if same link, elss idk
-    */
-
-    char name1[50],name2[50];
-    cout<<"Enter names of two persons:\n";
-    cin>>name1>>name2;
-    node* ptr1 = search(name1);
-    node* ptr2 = search(name2);
-    node* ptr;
-    node* ptrk=ptr1;
-    node* ptrk1=ptr2;
-
-    switch(ptr1->x - ptr2->x)
-    {
-
-    case 0:
-            char s[50];
-            strcpy(s,"sister");
-            if(ptr1->g)
-                strcpy(s,"brother");
-
-            ptr = ptr1;
-            while(ptr!=NULL)
-            {
-                if(ptr==ptr2)
-                {
-                    cout<<endl<<name1<<" is "<<name2<<"'s "<<s<<endl;
-                    return;
-                }
-                ptr = ptr->ns;
-            }
-            ptr = ptr2;
-            while(ptr!=NULL)
-            {
-                if(ptr==ptr1)
-                {
-                    cout<<endl<<name1<<" is "<<name2<<"'s "<<s<<endl;
-                    return;
-                }
-                ptr = ptr->ns;
-            }
-            cout<<endl<<name1<<" and "<<name2<<" are Cousins";
-            break;
-
-    case 1:
-            char str3[50];
-            strcpy(str3,"daughter");
-            if(ptr1->g)
-                strcpy(str3,"son");
-            ptr2 = ptr2->fc;
-            while(ptr2!=NULL)
-            {
-                if(ptr2==ptr1)
-                {
-                    cout<<endl<<name1<<" is "<<name2<<"'s "<<str3;
-                    return;
-                }
-                ptr2=ptr2->ns;
-            }
-            strcpy(str3,"niece");
-            if(ptr1->g)
-                strcpy(str3,"nephew");
-            cout<<endl<<name1<<" is "<<name2<<"'s "<<str3;
-            break;
-    case -1:
-            char str[10];
-            strcpy(str,"mother");
-            if(ptrk->g)
-                strcpy(str,"father");
-
-            ptr = ptrk->fc;
-            while(ptr!=NULL)
-            {
-                if(ptr==ptrk1)
-                {
-                    cout<<endl<<name1<<" is "<<name2<<"'s "<<str;
-                    return;
-                }
-                ptr=ptr->ns;
-            }
-            strcpy(str,"aunt");
-            if(ptrk->g)
-                strcpy(str,"uncle");
-            cout<<endl<<name1<<" is "<<name2<<"'s "<<str;
-            break;
-
-    case 2:
-            char str1[50];
-            strcpy(str1,"daughter");
-            if(ptr2->g)
-                strcpy(str1,"son");
-            ptr2 = ptr2->fc->fc;
-            while(ptr2!=NULL)
-            {
-                if(ptr2==ptr1)
-                {
-                    cout<<endl<<name1<<" is grand "<<str1<<" of "<<name2;
-                    return;
-                }
-                ptr2 = ptr2->ns;
-            }
-            break;
-    case -2:
-            char str2[50];
-            strcpy(str2,"mother");
-
-            if(ptr1->g)
-                strcpy(str2,"father");
-
-             ptr1 = ptr1->fc->fc;
-
-            while(ptr1!=NULL)
-            {
-                if(ptr1==ptr2)
-                {
-                    cout<<endl<<name1<<" is grand "<<str2<<" of "<<name2;
-                    return;
-                }
-                ptr1 = ptr1->ns;
-            }
-
-            break;
-    default:
-            cout<<"Too far relationship";
-            break;
-    }
-}
-
 node* family::search(char s[50])
 {
-    /*
-        Searches for the given name from start to it's sibilings and their children
-        Returns the pointer of node where the name is present
-    */
-
     node *ptr = start;
 
     if(strcmp(ptr->name,s)==0)
@@ -312,8 +149,6 @@ node* family::search(char s[50])
 
 node* family::traverseDown(node* ptr, char s[50])
 {
-    // Searches all the children
-
     ptr = ptr->fc;
 
     while(ptr!=NULL)
@@ -330,9 +165,6 @@ node* family::traverseDown(node* ptr, char s[50])
 
 node* family::traverseRight(node* ptr, char s[50])
 {
-
-    //  Searches all the sibilings
-
     ptr = ptr->ns;
 
     while(ptr!=NULL)
@@ -382,7 +214,6 @@ void family::addNew()
 
 void family::addSib(node* a,node* b)
 {
-    // b is added as sibling of a
 
     while(a->ns!=NULL)
         a=a->ns;
@@ -393,41 +224,12 @@ void family::addSib(node* a,node* b)
 
 void family::addChild(node* a,node* b)
 {
-
-    // b is added as child as a (or) b is added as sibiling to last child of a
-
     if(a->fc==NULL)
         a->fc = b;
     else
         addSib(a->fc,b);
 
     b->x = a->x+1;
-}
-
-void connect(family *T1, family *T2)
-{
-    char name[50];
-    int opt;
-    int x;
-    cout<<"Name of person in 1st tree to merge: ";
-    cin>>name;
-    cout<<T2->start->name<<" is __ to "<<name<<"\n1. Child 2. Sibling - ";;
-    cin>>opt;
-    node *ptr = T1->search(name);
-    switch(opt)
-    {
-        case 1:
-            T1->addChild(ptr,T2->start);
-            x = ptr->x + 1;
-            break;
-        case 2:
-            T1->addSib(ptr,T2->start);
-            x = ptr->x;
-            break;
-     }
-     T2->updateX(T2->start,x);
-     T2->destroy(T2->start);
-     cout<<"\nMerged\n";
 }
 
 int main()
@@ -447,7 +249,7 @@ int main()
 #ifdef LINUX
         system("clear");
 #endif // LINUX
-        cout<<"\n\n\n\tFamily tree no = "<<n<<"\n\n\t1. Add new person\n\t2. Find relationship b/w two persons\n\t3. Search\n\t4. Destroy\n\t5. Display\n\t6. Change family tree\n\t7. Connect two family trees\n\t8. Exit\n\n\tEnter your choice = ";
+        cout<<"\n\n\n\tFamily tree no = "<<n<<"\n\n\t1. Add new person\n\t2. Search\n\t3. Destroy\n\t4. Exit\n\n\tEnter your choice = ";
         cin>>opt;
         cout<<endl;
 
@@ -457,44 +259,20 @@ int main()
         default:
                 cout<<"Invalid input";
                 break;
-
         case 1:
                 T[n].addNew();
                 break;
-
         case 2:
-                T[n].find();
-                break;
-
-        case 3:
                 cout<<"Enter name of person to search: ";
                 cin>>name;
                 T[n].show(T[n].search(name));
                 break;
-
-        case 4:
+        case 3:
                 T[n].destroy(T[n].start);
                 cout<<"Tree "<<n<<" has been destroyed sucessfully";
                 break;
-
-        case 5:
-                T[n].display(T[n].start);
-                break;
-
-        case 6:
-                cout<<"Enter family tree number: ";
-                cin>>n;
-                break;
-
-        case 7:
-               cout<<"Merge __ to __ \n";
-               cin>>n2>>n1;
-               connect(&T[n1],&T[n2]);
-               break;
-
-        case 8:
+        case 4:
             return 0;
-
         }
         cout<<"\n\nPress any key to continue.....";
         cin>>c;
