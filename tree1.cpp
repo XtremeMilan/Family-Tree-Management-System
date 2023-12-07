@@ -9,7 +9,23 @@
 #include<string.h>
 #include<stdlib.h>
 using namespace std;
+#define Linux
 
+void welcome();
+void welcome()
+{
+    int n;
+    cout << "***********************************************************************\n";
+    cout << "          Welcome to Family Tree Management C++ Application       \n";
+    cout << "***********************************************************************\n";
+    cout << "\n";
+    cout << "This is a simple C++ application.\n";
+    cout << "Feel free to explore and interact!\n";
+    cout << "\n";
+    cin>>n;
+
+}
+// this is the node , each person will be a node 
 struct node
 {
     char name[50];
@@ -18,11 +34,11 @@ struct node
     node* fc;           // Pointer to first child
     node* ns;           // Pointer to next sibiling
 
-    node();
-    void getData();
+    node();             // constructor 
+    void getData();     // function to get person data
 };
 
-node::node()
+node::node()             // node data member defination with null value
 {
     fc=ns=NULL;
     g=0;
@@ -30,7 +46,7 @@ node::node()
     age=x=0;
 }
 
-void node::getData()
+void node::getData()        // function of get data for node
 {
     char ch;
     cout<<"\nName of the Person: ";
@@ -43,14 +59,14 @@ void node::getData()
         g=1;
 }
 
-class familyTree
+class family
 {
 
 public:
 
     node* start;
 
-    familyTree();
+    family();
 
     node* traverseDown(node*,char[]);   // Search functions
     node* traverseRight(node*,char[]);
@@ -68,12 +84,12 @@ public:
 
 };
 
-familyTree::familyTree()
+family::family()
 {
     start = NULL;
 }
 
-void familyTree::destroy(node* ptr)
+void family::destroy(node* ptr)
 {
     node* temp = ptr;
 
@@ -91,7 +107,7 @@ void familyTree::destroy(node* ptr)
     start = NULL;
 }
 
-void familyTree::show(node* ptr)
+void family::show(node* ptr)
 {
     char g[10];
     strcpy(g,"Female");
@@ -102,7 +118,7 @@ void familyTree::show(node* ptr)
     cout<<"Gender: "<<g<<endl;
 }
 
-void familyTree::display(node* ptr)
+void family::display(node* ptr)
 {
     // Traverses the full n-array tree by recursion to display names of all people
 
@@ -117,7 +133,7 @@ void familyTree::display(node* ptr)
     }
 }
 
-void familyTree::updateX(node* ptr,int x)
+void family::updateX(node* ptr,int x)
 {
     // Traverses the full n-array tree by recursion and updates x value of all people
 
@@ -133,7 +149,7 @@ void familyTree::updateX(node* ptr,int x)
     }
 }
 
-void familyTree::find()
+void family::find()
 {
 
     /*
@@ -269,7 +285,7 @@ void familyTree::find()
 
 
 
-node* familyTree::search(char s[50])
+node* family::search(char s[50])
 {
     /*
         Searches for the given name from start to it's sibilings and their children
@@ -291,7 +307,7 @@ node* familyTree::search(char s[50])
     }
 }
 
-node* familyTree::traverseDown(node* ptr, char s[50])
+node* family::traverseDown(node* ptr, char s[50])
 {
     // Searches all the children
 
@@ -309,7 +325,7 @@ node* familyTree::traverseDown(node* ptr, char s[50])
     return NULL;
 }
 
-node* familyTree::traverseRight(node* ptr, char s[50])
+node* family::traverseRight(node* ptr, char s[50])
 {
 
     //  Searches all the sibilings
@@ -328,7 +344,7 @@ node* familyTree::traverseRight(node* ptr, char s[50])
     return NULL;
 }
 
-void familyTree::addNew()
+void family::addNew()
 {
     node* temp = new node;
     temp->getData();
@@ -361,7 +377,7 @@ void familyTree::addNew()
     cout<<"\nPerson sucessfully added.\n";
 }
 
-void familyTree::addSib(node* a,node* b)
+void family::addSib(node* a,node* b)
 {
     // b is added as sibling of a
 
@@ -372,7 +388,7 @@ void familyTree::addSib(node* a,node* b)
     b->x = a->x;
 }
 
-void familyTree::addChild(node* a,node* b)
+void family::addChild(node* a,node* b)
 {
 
     // b is added as child as a (or) b is added as sibiling to last child of a
@@ -385,7 +401,7 @@ void familyTree::addChild(node* a,node* b)
     b->x = a->x+1;
 }
 
-void connect(familyTree *T1, familyTree *T2)
+void connect(family *T1, family *T2)
 {
     char name[50];
     int opt;
@@ -414,7 +430,8 @@ void connect(familyTree *T1, familyTree *T2)
 int main()
 {
      system("Color 16"); 
-    familyTree T[100];
+     welcome();
+    family T[100];
     int opt,n,n1,n2;
     char c,name[50];
     cout<<"\nEnter the family tree number = ";
