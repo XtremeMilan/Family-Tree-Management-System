@@ -8,23 +8,28 @@
 #include<iostream>
 #include<string.h>
 #include<stdlib.h>
+#include<stdio.h>
 using namespace std;
 #define Linux
 
-void welcome();
+
 void welcome()
 {
     int n;
-    cout << "***********************************************************************\n";
-    cout << "          Welcome to Family Tree Management C++ Application       \n";
-    cout << "***********************************************************************\n";
-    cout << "\n";
-    cout << "This is a simple C++ application.\n";
-    cout << "Feel free to explore and interact!\n";
-    cout << "\n";
+    std::cout << "***********************************************************************\n";
+   std:: cout << "          Welcome to Family Tree Management C++ Application       \n";
+   std::cout << "***********************************************************************\n";
+  std::cout << "- Simplify the process of building and maintaining family trees." << std::endl;
+    std::cout << "- Store detailed information about each family member." << std::endl;
+    std::cout << "- Automatically generate and update the tree structure." << std::endl;
+    std::cout << "- Features for searching, filtering, and exporting family tree data." << std::endl;
+    std::cout << "- An accessible and enjoyable tool for preserving genealogy." << std::endl << std::endl;
+    std::cout << "Thank you for joining us on this journey!" << std::endl;
+    std::cout << "Warm regards," << std::endl <<  std::endl;
     cin>>n;
-
+    system("clear");
 }
+
 // this is the node , each person will be a node 
 struct node
 {
@@ -429,7 +434,7 @@ void connect(family *T1, family *T2)
 
 int main()
 {
-     system("Color 16"); 
+     
      welcome();
     family T[100];
     int opt,n,n1,n2;
