@@ -15,18 +15,18 @@ using namespace std;
 void welcome()
 {
     int n;
-    std::cout << "***********************************************************************\n";
-   std:: cout << "          Welcome to Family Tree Management C++ Application       \n";
-   std::cout << "***********************************************************************\n";
-  std::cout << "- Simplify the process of building and maintaining family trees." << std::endl;
-    std::cout << "- Store detailed information about each family member." << std::endl;
-    std::cout << "- Automatically generate and update the tree structure." << std::endl;
-    std::cout << "- Features for searching, filtering, and exporting family tree data." << std::endl;
-    std::cout << "- An accessible and enjoyable tool for preserving genealogy." << std::endl << std::endl;
-    std::cout << "Thank you for joining us on this journey!" << std::endl;
-    std::cout << "Warm regards," << std::endl <<  std::endl;
-    cin>>n;
-    system("clear");
+    cout << "***********************************************************************\n";
+    cout << "          Welcome to Family Tree Management C++ Application       \n";
+    cout << "***********************************************************************\n";
+    cout << "- Simplify the process of building and maintaining family trees." <<endl;
+    cout << "- Store detailed information about each family member." <<endl;
+    cout << "- Automatically generate and update the tree structure." <<endl;
+    cout << "- Features for searching, filtering, and exporting family tree data." << endl;
+    cout << "- An accessible and enjoyable tool for preserving genealogy." << endl << endl;
+    cout << "Warm regards," << endl <<  endl;
+    cout<<"Press Enter to Continue!!";
+    cin.ignore();
+    system("cls");
 }
 // this is the node , each person will be a node 
 struct node
@@ -49,17 +49,30 @@ node::node()             // node data member defination with null value
     age=x=0;
 }
 
-void node::getData()        // function of get data for node
+void node::getData()
 {
-    char ch;
+    int choice;
     cout<<"\nName of the Person: ";
     cin>>name;
     cout<<"Age of "<<name<<": ";
     cin>>age;
-    cout<<name<<" is (m/f): ";
-    cin>>ch;
-    if(ch=='m')
-        g=1;
+    gender:
+	    cout <<"Choose the gender of"<< name <<endl;
+	    cout<<"1. Male"<<endl;
+	    cout<<"2. Female"<<endl;
+	    cout<<"Enter Choice: ";
+	    cin >> choice;
+	    switch(choice){
+	    	case 1:
+	    		g=1;
+	    		break;
+	    	case 2:
+	    		g=0;
+	    		break;
+	    	default:
+	    		cout<<endl<<"Wrong choice! choose the correct option."<<endl;
+	    		goto gender;
+	}
 }
 
 class family
