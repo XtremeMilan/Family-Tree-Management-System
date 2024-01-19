@@ -1,8 +1,8 @@
 //+------------------------------------------------------------------------------------
-//                          Family Tree Manaement system
+//                          Family Tree Management System
 //
 //                                  Minor Project 
-//         Team: Aman sheoran || Milan singh || Mayank Garg || Steve Yadav 
+//         Team: Aman Sheoran || Milan Singh || Mayank Garg || Steve Yadav 
 //  
 
 #include<iostream>
